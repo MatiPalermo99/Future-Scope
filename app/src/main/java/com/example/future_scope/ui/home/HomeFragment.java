@@ -14,15 +14,22 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.future_scope.R;
 
-public class HomeFragment extends Fragment {
+import java.util.Random;
 
+public class HomeFragment extends Fragment {
+    int images[] = {R.drawable.land, R.drawable.batman, R.drawable.john,R.drawable.carol, R.drawable.mamma, R.drawable.bird };
     private HomeViewModel homeViewModel;
+    int n= Math.abs((new Random().nextInt())%6);
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        System.out.println(n);
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        root.setBackgroundResource(images[n]);
+
         final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -30,6 +37,7 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
         return root;
     }
 }
