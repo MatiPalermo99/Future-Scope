@@ -16,4 +16,13 @@
         <item name="colorAccent">@color/textInputLayout</item>
         <item name="android:textColorHint">@color/textInputLayout</item>
     </style>
+    <style name="MtButtonStyle"
+        parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/GreenButtonThemeOverlay</item>
+    </style>
+
+    <style name="GreenButtonThemeOverlay">
+        <item name="colorPrimary">@color/black</item>
+    </style>
+
 </resources>

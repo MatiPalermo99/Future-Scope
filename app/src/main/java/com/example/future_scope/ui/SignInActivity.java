@@ -1,19 +1,25 @@
 package com.example.future_scope.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.future_scope.MainActivity;
 import com.example.future_scope.R;
 
 public class SignInActivity extends AppCompatActivity {
 
-    ImageView imageView;
-    TextView textView;
+    private EditText emailInicio,contraseniaInicio;
+    private Button registrarse,iniciarSesion;
     int count = 0;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -23,39 +29,26 @@ public class SignInActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signin);
-        imageView = findViewById(R.id.imageView);
-        textView = findViewById(R.id.textView);
-        /*imageView.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
-            public void onSwipeTop() {
-            }
 
-            public void onSwipeRight() {
-                if (count == 0) {
-                    imageView.setImageResource(R.drawable.good_night_img);
-                    textView.setText("Night");
-                    count = 1;
-                } else {
-                    imageView.setImageResource(R.drawable.good_morning_img);
-                    textView.setText("Morning");
-                    count = 0;
-                }
-            }
+        emailInicio=findViewById(R.id.email_inicio_sesion);
+        contraseniaInicio=findViewById(R.id.contrasenia_inicio_sesion);
+        registrarse=findViewById(R.id.inicio_sesion_a_registro);
+        iniciarSesion=findViewById(R.id.aceptar_inicio);
 
-            public void onSwipeLeft() {
-                if (count == 0) {
-                    imageView.setImageResource(R.drawable.good_night_img);
-                    textView.setText("Night");
-                    count = 1;
-                } else {
-                    imageView.setImageResource(R.drawable.good_morning_img);
-                    textView.setText("Morning");
-                    count = 0;
-                }
+        registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(i);
             }
+        });
 
-            public void onSwipeBottom() {
+        iniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SignInActivity.this, MainActivity.class);
+                startActivity(i);
             }
-
-        });*/
+        });
     }
 }
