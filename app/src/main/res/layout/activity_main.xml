@@ -22,9 +22,13 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
+        app:itemTextColor="@color/yellow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        app:itemRippleColor="@color/yellow"
+        android:outlineSpotShadowColor="@color/yellow"
+        android:outlineAmbientShadowColor="@color/yellow"
+        android:background="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
