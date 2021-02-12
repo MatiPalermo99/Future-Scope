@@ -7,66 +7,52 @@
     tools:context=".ui.HomeFragment"
     android:orientation="vertical">
 
-    <ScrollView
+    <SearchView
+        android:paddingBottom="1mm"
+        android:paddingHorizontal="1mm"
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:animateLayoutChanges="true"
+        app:queryHint="Buscar"
+        android:layout_margin="1mm"
+        android:background="@color/gray"
+        android:layoutDirection="rtl">
+    </SearchView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIconTint="@color/yellow"
+        app:tabTextAppearance="@style/tab_text"
+        app:tabTextColor="@color/yellow"
+        app:tabIndicatorColor="@color/yellow"
+        app:tabSelectedTextColor="@color/yellow"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_baseline_local_movies_24"
+            android:text="Peliculas" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabitem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_baseline_live_tv_24"
+            android:text="Series" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"
-        android:layout_weight="1">
+        ></androidx.viewpager.widget.ViewPager>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="4">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Peliculas populares"
-                android:textColor="@color/yellow"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Ultimas Vistas por Amigos"
-                android:textColor="@color/yellow"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Reviews de amigos"
-                android:textColor="@color/yellow"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txt_vp_item_page"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Estrenos de cines cercanos"
-                android:textColor="@color/yellow"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

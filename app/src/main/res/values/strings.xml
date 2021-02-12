@@ -29,4 +29,6 @@
     <string name="sign_in_facebook">Sign In FB</string>
     <string name="sign_in_google">Sign In Google</string>
     <string name="logout_text">Log Out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
