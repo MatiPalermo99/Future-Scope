@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,15 +23,36 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
-        app:itemTextColor="@color/yellow"
+        android:theme="@style/Widget.BottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:itemRippleColor="@color/yellow"
-        android:outlineSpotShadowColor="@color/yellow"
-        android:outlineAmbientShadowColor="@color/yellow"
-        android:background="@color/yellow"
+        android:background="@color/black"
+        app:itemIconTint="@color/yellow"
+        app:itemTextColor="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/yellow"
+        android:backgroundTintMode="add"
+        android:src="@drawable/ic_baseline_add_24"
+        android:tint="@color/black"
+        android:outlineAmbientShadowColor="@color/yellow"
+        app:borderWidth="0dp"
+        app:elevation="9dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nav_view"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

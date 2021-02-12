@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/i_music"
+        android:checked="true"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/title_home" />
-
+        android:title="Home" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/i_backup"
         android:icon="@drawable/ic_baseline_notifications_24"
         android:title="Notificaciones" />
-
+    <!--must set the item title to empty-->
     <item
-        android:id="@+id/navigation_agregar"
+        android:id="@+id/i_empty"
         android:title="" />
-
     <item
-        android:id="@+id/navigation_watchlist"
+        android:id="@+id/i_favor"
         android:icon="@drawable/ic_baseline_remove_red_eye_24"
-        android:title="@string/title_watchlist" />
-
+        android:title="Watchlist" />
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/i_visibility"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Perfil" />
-
 </menu>

@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.support.annotation.IntDef;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsCompat;
 import android.view.View;
 
 import java.lang.annotation.Retention;

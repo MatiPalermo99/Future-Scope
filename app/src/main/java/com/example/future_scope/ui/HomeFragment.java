@@ -24,9 +24,6 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         root.setBackgroundResource(images[0]);
 
-        final TextView text_home = root.findViewById(R.id.text_home);
-        text_home.setText("This is home fragment");
-
         return root;
     }
 
