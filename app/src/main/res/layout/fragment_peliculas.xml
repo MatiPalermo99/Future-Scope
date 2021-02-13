@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Controlador.Peliculas">
+    tools:context=".ui.Controlador.PeliculasFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,6 +18,11 @@
             android:weightSum="4"
             android:background="@color/darkgray"
             >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylcer_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -66,8 +71,6 @@
                 android:text="Estrenos de cines cercanos"
                 android:textColor="@color/yellow"
                 android:textStyle="bold" />
-
         </LinearLayout>
     </ScrollView>
-
 </FrameLayout>
