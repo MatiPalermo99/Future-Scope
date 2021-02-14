@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.future_scope.MainActivity;
 import com.example.future_scope.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,11 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
         registrarse=findViewById(R.id.aceptar_registro);
 
         fAuth = FirebaseAuth.getInstance();
-        if(fAuth.getCurrentUser() != null){
-            Intent i = new Intent(SignUpActivity.this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
 
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +67,8 @@ public class SignUpActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(password)) {
                     contraseniaRegistro.setError("Contraseña obligatoria.");
                     return;
-                }else if(password.length() < 8 || password.length() > 20){
-                    contraseniaRegistro.setError("Debe tener entre 8 y 20 caracteres");
+                }else if(password.length() < 8){
+                    contraseniaRegistro.setError("Debe tener al menos 8 caracteres");
                     return;
                 }
 
@@ -85,16 +82,17 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(SignUpActivity.this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(SignUpActivity.this, MainActivity.class);
-                            startActivity(i);
-                        }else{
-                            Toast.makeText(SignUpActivity.this, "Error: "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(SignUpActivity.this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignUpActivity.this, "Error: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

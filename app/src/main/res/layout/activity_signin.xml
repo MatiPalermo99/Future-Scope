@@ -99,7 +99,8 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="40"/>
 
         <EditText
             android:id="@+id/contrasenia_inicio_sesion"
@@ -114,7 +115,8 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
         <LinearLayout
             android:layout_width="match_parent"
