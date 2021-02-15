@@ -55,4 +55,15 @@ public class Pelicula {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return "Pelicula{" +
+                "titulo='" + titulo + '\'' +
+                ", image=" + image +
+                ", anio=" + anio +
+                ", duracionMin=" + duracionMin +
+                ", rating=" + rating +
+                '}';
+    }
 }

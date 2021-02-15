@@ -29,6 +29,9 @@ android {
     }
 }
 
+
+apply plugin: 'com.google.gms.google-services'
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -50,8 +53,20 @@ dependencies {
     compile 'codelight.studios:android-smart-login:1.2'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:2.0.3'
+
+    implementation 'androidx.room:room-common:2.2.5'
+    implementation 'androidx.room:room-runtime:2.2.5'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 }

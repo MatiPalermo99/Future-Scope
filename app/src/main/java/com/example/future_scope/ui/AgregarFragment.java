@@ -24,9 +24,6 @@ public class AgregarFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_agregar, container, false);
         root.setBackgroundResource(images[0]);
 
-        final TextView text_home = root.findViewById(R.id.text_agregar);
-        text_home.setText("This is agregar fragment");
-
         return root;
     }
 

@@ -42,9 +42,13 @@
 
                 <TextView
                     android:id="@+id/titulo_pelicula"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:textAllCaps="true"
+                    android:layout_height="40dp"
+                    android:gravity="center"
                     android:text="Titulo de la pelicula a mostrar"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
                     android:maxLines="2"
                     android:textSize="13dp"
                     android:padding="0.5mm"

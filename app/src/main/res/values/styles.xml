@@ -53,4 +53,21 @@
         <item name="android:textColorSecondary">@color/green</item>
     </style>
 
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <!-- Text Size -->
+        <!-- Query Text Color -->
+        <item name="android:textColorPrimary">@color/yellow</item>
+        <!-- Hint Color -->
+        <item name="android:textColorHint">@color/yellow</item>
+        <!-- Icon Color -->
+        <item name="android:tint">@color/yellow</item>
+    </style>
+
+    <style name="Button" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="android:fontFamily">@font/gotham</item>
+    </style>
+
+
 </resources>
