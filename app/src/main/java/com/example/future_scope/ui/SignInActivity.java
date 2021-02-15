@@ -53,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
 
-        reset_alert = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        reset_alert = new AlertDialog.Builder(this, R.style.AlertDialogCustom );
         inflater = this.getLayoutInflater();
 
         registrarse.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,9 @@ public class SignInActivity extends AppCompatActivity {
                 fAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(SignInActivity.this, "¡Bienvenidos al Himalaya!", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String username =  user.getDisplayName();
+                        Toast.makeText(SignInActivity.this, "¡Bienvenidx al Himalaya, "+ username +"!", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(i);
                     }
