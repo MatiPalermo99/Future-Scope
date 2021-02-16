@@ -8,12 +8,28 @@ public class Pelicula {
     private int anio;
     private int duracionMin;
     private double rating;
+    private String genero;
 
     public Pelicula(String titulo, int anio, int duracionMin, double rating) {
         this.titulo = titulo;
         this.anio = anio;
         this.duracionMin = duracionMin;
         this.rating = rating;
+    }
+
+    public Pelicula(String titulo, int duracionMin,String genero) {
+        this.titulo = titulo;
+        this.anio = anio;
+        this.duracionMin = duracionMin;
+        this.genero = genero;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public String getTitulo() {
@@ -60,10 +76,8 @@ public class Pelicula {
     public String toString() {
         return "Pelicula{" +
                 "titulo='" + titulo + '\'' +
-                ", image=" + image +
-                ", anio=" + anio +
                 ", duracionMin=" + duracionMin +
-                ", rating=" + rating +
+                ", genero='" + genero + '\'' +
                 '}';
     }
 }

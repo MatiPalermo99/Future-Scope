@@ -1,8 +1,11 @@
 package com.example.future_scope.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class MovieResults {
+public class MovieResults implements Parcelable {
 
     /**
      * page : 1
@@ -15,6 +18,24 @@ public class MovieResults {
     private List<ResultsDTO> results;
     private Integer totalPages;
     private Integer totalResults;
+
+    protected MovieResults(Parcel in) {
+        if (in.readByte() == 0) {
+            page = null;
+        } else {
+            page = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            totalPages = null;
+        } else {
+            totalPages = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            totalResults = null;
+        } else {
+            totalResults = in.readInt();
+        }
+    }
 
     public Integer getPage() {
         return page;
@@ -48,7 +69,46 @@ public class MovieResults {
         this.totalResults = totalResults;
     }
 
-    public static class ResultsDTO {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MovieResults> CREATOR = new Creator<MovieResults>() {
+        @Override
+        public MovieResults createFromParcel(Parcel in) {
+            return new MovieResults(in);
+        }
+
+        @Override
+        public MovieResults[] newArray(int size) {
+            return new MovieResults[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (page == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(page);
+        }
+        if (totalPages == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(totalPages);
+        }
+        if (totalResults == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(totalResults);
+        }
+    }
+
+    public static class ResultsDTO implements Parcelable{
         /**
          * adult : false
          * backdrop_path : /srYya1ZlI97Au4jUYAktDe3avyA.jpg
@@ -78,8 +138,98 @@ public class MovieResults {
         private String releaseDate;
         private String title;
         private Boolean video;
-        private Integer voteAverage;
+        private Double voteAverage;
         private Integer voteCount;
+
+        public ResultsDTO(String title, String releaseDate, Double popularity, Double voteAverage) {
+            this.popularity = popularity;
+            this.releaseDate = releaseDate;
+            this.title = title;
+            this.voteAverage = voteAverage;
+        }
+
+        protected ResultsDTO(Parcel in) {
+            byte tmpAdult = in.readByte();
+            adult = tmpAdult == 0 ? null : tmpAdult == 1;
+            backdropPath = in.readString();
+            if (in.readByte() == 0) {
+                id = null;
+            } else {
+                id = in.readInt();
+            }
+            originalLanguage = in.readString();
+            originalTitle = in.readString();
+            overview = in.readString();
+            if (in.readByte() == 0) {
+                popularity = null;
+            } else {
+                popularity = in.readDouble();
+            }
+            posterPath = in.readString();
+            releaseDate = in.readString();
+            title = in.readString();
+            byte tmpVideo = in.readByte();
+            video = tmpVideo == 0 ? null : tmpVideo == 1;
+            if (in.readByte() == 0) {
+                voteAverage = null;
+            } else {
+                voteAverage = in.readDouble();
+            }
+            if (in.readByte() == 0) {
+                voteCount = null;
+            } else {
+                voteCount = in.readInt();
+            }
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeByte((byte) (adult == null ? 0 : adult ? 1 : 2));
+            dest.writeString(backdropPath);
+            if (id == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(id);
+            }
+            dest.writeString(originalLanguage);
+            dest.writeString(originalTitle);
+            dest.writeString(overview);
+            if (popularity == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeDouble(popularity);
+            }
+            dest.writeString(posterPath);
+            dest.writeString(releaseDate);
+            dest.writeString(title);
+            dest.writeByte((byte) (video == null ? 0 : video ? 1 : 2));
+            if (voteAverage == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeDouble(voteAverage);
+            }
+            if (voteCount == null) {
+                dest.writeByte((byte) 0);
+            } else {
+                dest.writeByte((byte) 1);
+                dest.writeInt(voteCount);
+            }
+        }
+
+        public static final Creator<ResultsDTO> CREATOR = new Creator<ResultsDTO>() {
+            @Override
+            public ResultsDTO createFromParcel(Parcel in) {
+                return new ResultsDTO(in);
+            }
+
+            @Override
+            public ResultsDTO[] newArray(int size) {
+                return new ResultsDTO[size];
+            }
+        };
 
         public Boolean getAdult() {
             return adult;
@@ -177,11 +327,11 @@ public class MovieResults {
             this.video = video;
         }
 
-        public Integer getVoteAverage() {
+        public Double getVoteAverage() {
             return voteAverage;
         }
 
-        public void setVoteAverage(Integer voteAverage) {
+        public void setVoteAverage(Double voteAverage) {
             this.voteAverage = voteAverage;
         }
 
@@ -192,5 +342,15 @@ public class MovieResults {
         public void setVoteCount(Integer voteCount) {
             this.voteCount = voteCount;
         }
+
+
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+
     }
+
 }

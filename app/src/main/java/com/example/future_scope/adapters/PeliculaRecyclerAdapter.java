@@ -37,13 +37,12 @@ public class PeliculaRecyclerAdapter extends RecyclerView.Adapter<PeliculaRecycl
         peliculaViewHolder.anio.setTag(position);
         peliculaViewHolder.duracion.setTag(position);
 
-
         Pelicula pelicula = mDataset.get(position);
         peliculaViewHolder.imgPelicula.setImageResource(R.drawable.carol);
         peliculaViewHolder.titulo.setText(pelicula.getTitulo());
-        peliculaViewHolder.rating.setText(""+pelicula.getRating());
-        peliculaViewHolder.anio.setText(pelicula.getAnio()+"");
-        peliculaViewHolder.duracion.setText(pelicula.getDuracionMin()+ "min.");
+        peliculaViewHolder.rating.setText("R");
+        peliculaViewHolder.anio.setText(pelicula.getDuracionMin()+" min.");
+        peliculaViewHolder.duracion.setText(pelicula.getGenero());
     }
 
     @Override
@@ -63,8 +62,8 @@ public class PeliculaRecyclerAdapter extends RecyclerView.Adapter<PeliculaRecycl
             imgPelicula = v.findViewById(R.id.imagen_pelicula);
             titulo = v.findViewById(R.id.titulo_pelicula);
             rating = v.findViewById(R.id.rating_pelicula);
-            anio = v.findViewById(R.id.anio_pelicula);
-            duracion = v.findViewById(R.id.duracion_pelicula);
+            anio = v.findViewById(R.id.duracion_min_pelicula);
+            duracion = v.findViewById(R.id.genero_pelicula);
         }
     }
 }

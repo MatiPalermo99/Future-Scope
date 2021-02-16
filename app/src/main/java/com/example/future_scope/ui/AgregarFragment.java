@@ -26,7 +26,4 @@ public class AgregarFragment extends Fragment {
 
         return root;
     }
-
-
-
 }
