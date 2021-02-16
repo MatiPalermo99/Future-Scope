@@ -106,7 +106,8 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="40"/>
 
         <EditText
             android:id="@+id/usuario_registro"
@@ -116,13 +117,14 @@
             android:backgroundTint="@color/yellow"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
-            android:drawableRight="@drawable/ic_email_white_24dp"
+            android:drawableRight="@drawable/ic_baseline_person_registro_24"
             android:fontFamily="@font/calibri"
             android:hint="Nombre de usuario"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
         <EditText
             android:id="@+id/contrasenia_registro"
@@ -132,13 +134,14 @@
             android:backgroundTint="@color/yellow"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
-            android:drawableRight="@drawable/ic_email_white_24dp"
+            android:drawableRight="@drawable/ic_lock_white_24dp"
             android:fontFamily="@font/calibri"
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
         <EditText
             android:id="@+id/repetir_contrasenia_registro"
@@ -154,7 +157,8 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:maxLength="20"/>
 
         <Switch
             android:id="@+id/switch_terminos"
