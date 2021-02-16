@@ -21,4 +21,6 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="textInputLayout">#96ffffff</color>
     <color name="darkgray">#86000000</color>
+    <color name="fondo">#C6555151</color>
+
 </resources>

@@ -17,8 +17,8 @@ public class PagerController extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            case 0: return new Peliculas();
-            case 1: return new Series();
+            case 0: return new PeliculasFragment();
+            case 1: return new SeriesFragment();
             default: return null;
         }
 

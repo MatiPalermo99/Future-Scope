@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Controlador.Peliculas">
+    tools:context=".ui.Controlador.PeliculasFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,58 +16,158 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="4"
-            android:background="@color/darkgray"
-            >
+            android:background="@color/fondo">
 
             <TextView
+                android:layout_marginTop="1mm"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:paddingTop="1mm"
+                android:paddingLeft="1mm"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:textStyle="bold"
                 android:text="Peliculas populares"
                 android:textColor="@color/yellow"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
-            <TextView
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Ultimas Vistas por Amigos"
-                android:textColor="@color/yellow"
-                android:textStyle="bold" />
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="2mm"
+                android:background="#deff00" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Reviews de amigos"
-                android:textColor="@color/yellow"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txt_vp_item_page"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/bg_round_rect"
-                android:gravity="center"
-                android:text="Estrenos de cines cercanos"
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_peliculas_populares"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="1mm"
+                android:textAlignment="center"
+                android:paddingLeft="1mm"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:textStyle="bold"
+                android:text="vistas por los que sigues"
                 android:textColor="@color/yellow"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="2mm"
+                android:background="#deff00" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_peliculas_amigos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:paddingTop="1mm"
+                android:paddingLeft="1mm"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:textStyle="bold"
+                android:text="reviews recientes"
+                android:textColor="@color/yellow"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="2mm"
+                android:background="#deff00" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="1mm"
+                android:paddingLeft="1mm"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Cines cercanos"
+                android:textColor="@color/yellow"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_marginHorizontal="2mm"
+                android:background="#deff00" />
+
+            <Button
+                android:layout_marginVertical="30dp"
+                android:drawableLeft="@drawable/map"
+                android:drawableRight="@drawable/ubicacion"
+                android:padding="25dp"
+                android:id="@+id/boton_maps"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textColor="@color/black"
+                android:theme="@style/Button"
+                android:layout_marginHorizontal="100dp"
+                android:text="Mapa de cines">
+            </Button>
 
         </LinearLayout>
     </ScrollView>
-
 </FrameLayout>
