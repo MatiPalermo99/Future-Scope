@@ -58,7 +58,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/foto_portada"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingClass" />
 
                 <TextView
                     android:id="@+id/nombre_usuario_perfil"
@@ -127,6 +128,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/config_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="15dp"

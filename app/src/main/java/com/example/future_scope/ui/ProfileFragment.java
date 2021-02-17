@@ -1,16 +1,25 @@
 package com.example.future_scope.ui;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.future_scope.MainActivity;
 import com.example.future_scope.R;
 import com.example.future_scope.adapters.ListaRecyclerAdapter;
 import com.example.future_scope.adapters.PeliculaAmigoRecyclerAdapter;
@@ -20,6 +29,10 @@ import com.example.future_scope.model.Lista;
 import com.example.future_scope.model.Pelicula;
 import com.example.future_scope.model.Review;
 import com.example.future_scope.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +54,14 @@ public class ProfileFragment extends Fragment {
     private PeliculaAmigoRecyclerAdapter peliculasAmigosAdapter;
     private ReviewRecyclerAdapter reviewRecyclerAdapter;
     private ListaRecyclerAdapter listaRecyclerAdapter;
+
+    private TextView nombre_usuario;
+    private ImageView foto_usuario, btConfig;
+
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    private AlertDialog.Builder config_dialog;
+    private LayoutInflater inflaterLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +117,44 @@ public class ProfileFragment extends Fragment {
         rvListas.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvListas.setHasFixedSize(true);
         rvListas.setAdapter(listaRecyclerAdapter);
+
+        nombre_usuario = root.findViewById(R.id.nombre_usuario_perfil);
+        foto_usuario = root.findViewById(R.id.foto_usuario_perfil);
+
+        if(user != null){
+            nombre_usuario.setText(user.getDisplayName());
+            if(user.getPhotoUrl() != null){
+                Uri photo = user.getPhotoUrl();
+                foto_usuario.setImageURI(photo);
+            }
+        }
+
+        config_dialog = new AlertDialog.Builder(this.getActivity(), R.style.AlertDialogCustom);
+        inflaterLayout = this.getActivity().getLayoutInflater();
+        btConfig = root.findViewById(R.id.config_button);
+
+        btConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = inflaterLayout.inflate(R.layout.alert_dialog_config, null);
+                Button btLogout = view.findViewById(R.id.bt_logout);
+                btLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent i = new Intent(view.getContext(), SignInActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    }
+                });
+                config_dialog
+                        .setNegativeButton("Cancelar", null)
+                        .setView(view)
+                        .create().show();
+            }
+        });
+
+
 
         return root;
     }
