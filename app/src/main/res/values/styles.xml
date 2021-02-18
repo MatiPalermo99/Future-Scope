@@ -65,6 +65,7 @@
         <item name="android:background">#1E1E1E</item>
         <item name="buttonBarNegativeButtonStyle">@style/buttonsDialog</item>
         <item name="buttonBarPositiveButtonStyle">@style/buttonsDialog</item>
+        <item name="buttonStyle">@style/buttonsDialog</item>
 
     </style>
 
