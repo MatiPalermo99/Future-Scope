@@ -22,7 +22,7 @@ public class AgregarFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_agregar, container, false);
-        root.setBackgroundResource(images[0]);
+
 
         return root;
     }

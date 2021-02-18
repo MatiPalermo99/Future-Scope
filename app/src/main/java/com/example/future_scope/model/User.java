@@ -1,11 +1,17 @@
 package com.example.future_scope.model;
 
 import android.media.Image;
-
-import java.sql.Array;
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 
-public class User {
+@Entity
+public class User implements Parcelable {
+
+    @PrimaryKey(autoGenerate = true)
     private String email;
     private String username;
     private String password;
@@ -16,11 +22,50 @@ public class User {
     private ArrayList<User> seguidos;
     private ArrayList<Lista> listas;
 
+    public User(String email, String username, String password, Image fotoPerfil, ArrayList<Review> reviews, String descripcionPerfil, ArrayList<User> seguidores, ArrayList<User> seguidos, ArrayList<Lista> listas) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.fotoPerfil = fotoPerfil;
+        this.reviews = reviews;
+        this.descripcionPerfil = descripcionPerfil;
+        this.seguidores = seguidores;
+        this.seguidos = seguidos;
+        this.listas = listas;
+    }
+
+
+    @Ignore
     public User(String email, String username, String password) {
         this.email = email;
         this.username = username;
         this.password = password;
     }
+
+    @Ignore
+    public User(){
+    }
+
+    protected User(Parcel in) {
+        email = in.readString();
+        username = in.readString();
+        password = in.readString();
+        descripcionPerfil = in.readString();
+        seguidores = in.createTypedArrayList(User.CREATOR);
+        seguidos = in.createTypedArrayList(User.CREATOR);
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public Image getFotoPerfil() {
         return fotoPerfil;
@@ -96,5 +141,20 @@ public class User {
 
     public void setListas(ArrayList<Lista> listas) {
         this.listas = listas;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(email);
+        dest.writeString(username);
+        dest.writeString(password);
+        dest.writeString(descripcionPerfil);
+        dest.writeTypedList(seguidores);
+        dest.writeTypedList(seguidos);
     }
 }
