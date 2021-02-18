@@ -5,24 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context=".MapsActivity" >
-    <TextView
-        android:id="@+id/titulo_mapa"
-        android:text="Ubicacion actual:"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
 
-    <TextView
-        android:id="@+id/ubicacion_actual"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
     <Button
-        android:id="@+id/confirmar"
+        android:layout_marginVertical="10dp"
+        android:id="@+id/buscar_cines"
+        android:background="@drawable/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmar ubicacion"></Button>
+        android:textColor="@color/black"
+        android:theme="@style/Button"
+        android:layout_marginHorizontal="10dp"
+        android:text="Mostrar cines cercanos"/>
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -31,4 +27,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
+
 </LinearLayout>

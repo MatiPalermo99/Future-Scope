@@ -113,6 +113,8 @@ public class PeliculasFragment extends Fragment{
         });
 
         peliculaRest.listarPeliculas(miHandler);
+        peliculaRest.buscarPeliculaTitulo("bird",miHandler);
+
         return root;
     }
 
@@ -141,28 +143,19 @@ public class PeliculasFragment extends Fragment{
                     if(d!=null){
                         String genero="";
                         for(Details.GenresDTO g: d.getGenres()) genero=genero+g.getName()+"/";
-                        System.out.println(genero);
                         genero=genero.substring(0,genero.length()-1);
 
                         popularesFinal.add(new Pelicula(d.getTitle(),d.getRuntime(),genero));
-                        System.out.println(popularesFinal);
 
                         peliculasPopularesAdapter = new PeliculaRecyclerAdapter(popularesFinal);
                         rvPopulares.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                         rvPopulares.setHasFixedSize(true);
                         rvPopulares.setAdapter(peliculasPopularesAdapter);
-
                     }
                     break;
                 case LISTAR_PELICULAS:
                     ArrayList<MovieResults.ResultsDTO> p = data.getParcelableArrayList("peliculas");
-                    if(p!=null){
-                        populares.clear();
-                        populares=p;
-
-                        buscarPeliculas(populares);
-
-                    }
+                    if(p!=null)buscarPeliculas(p);
                     break;
                 case ERROR:
                     String error = data.getParcelable("error");

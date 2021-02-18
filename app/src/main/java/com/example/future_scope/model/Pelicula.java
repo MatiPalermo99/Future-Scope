@@ -2,7 +2,17 @@ package com.example.future_scope.model;
 
 import android.media.Image;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import com.example.future_scope.api.SearchResults;
+
+@Entity
 public class Pelicula {
+
+    @PrimaryKey(autoGenerate = true)
+    private int idPelicula;
     private String titulo;
     private Image image;
     private int anio;
@@ -10,6 +20,17 @@ public class Pelicula {
     private double rating;
     private String genero;
 
+    public Pelicula(int idPelicula, String titulo, Image image, int anio, int duracionMin, double rating, String genero) {
+        this.idPelicula = idPelicula;
+        this.titulo = titulo;
+        this.image = image;
+        this.anio = anio;
+        this.duracionMin = duracionMin;
+        this.rating = rating;
+        this.genero = genero;
+    }
+
+    @Ignore
     public Pelicula(String titulo, int anio, int duracionMin, double rating) {
         this.titulo = titulo;
         this.anio = anio;
@@ -17,11 +38,26 @@ public class Pelicula {
         this.rating = rating;
     }
 
+    @Ignore
+    public Pelicula(SearchResults.ResultsDTO resultsDTO) {
+        this.idPelicula =resultsDTO.getId();
+        this.titulo = resultsDTO.getTitle();
+    }
+
+    @Ignore
     public Pelicula(String titulo, int duracionMin,String genero) {
         this.titulo = titulo;
         this.anio = anio;
         this.duracionMin = duracionMin;
         this.genero = genero;
+    }
+
+    public int getIdPelicula() {
+        return idPelicula;
+    }
+
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
     public String getGenero() {

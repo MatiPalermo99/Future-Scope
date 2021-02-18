@@ -24,4 +24,13 @@ public interface PeliculaDAORest {
             @Query("language") String language
     );
 
+    @GET("/3/search/movie")
+    Call<SearchResults> getPeliculaTitulo(
+            @Query("query") String titulo,
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("include_adult") boolean include_adult
+    );
+
+
 }

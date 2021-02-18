@@ -68,6 +68,10 @@
 
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
+
     <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
         <!-- Text Size -->
         <!-- Query Text Color -->

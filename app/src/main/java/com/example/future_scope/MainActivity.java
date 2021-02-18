@@ -1,6 +1,7 @@
 package com.example.future_scope;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +12,10 @@ import com.example.future_scope.api.AccionesDAO;
 import com.example.future_scope.api.PeliculaDAORest;
 import com.example.future_scope.api.MovieResults;
 import com.example.future_scope.api.PeliculaRepositoryRest;
+import com.example.future_scope.model.User;
+import com.example.future_scope.ui.AgregarActivity;
 import com.example.future_scope.ui.Controlador.PeliculasFragment;
+import com.example.future_scope.ui.ReviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,12 +41,14 @@ public class MainActivity extends AppCompatActivity{
     private NavController navController;
     private Activity activity;
     private PeliculaRepositoryRest peliculaRest;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity=this;
         setContentView(R.layout.activity_main);
+        user=new User();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -54,7 +60,14 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupWithNavController(navView, navController);
 
         fab=findViewById(R.id.fab);
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, AgregarActivity.class);
+                i.putExtra("usuario",user);
+                startActivity(i);
+            }
+        });
     }
 
 }
