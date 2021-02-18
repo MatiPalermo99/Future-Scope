@@ -1,16 +1,33 @@
 package com.example.future_scope.ui;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.future_scope.MainActivity;
 import com.example.future_scope.R;
 import com.example.future_scope.adapters.ListaRecyclerAdapter;
 import com.example.future_scope.adapters.PeliculaAmigoRecyclerAdapter;
@@ -20,14 +37,25 @@ import com.example.future_scope.model.Lista;
 import com.example.future_scope.model.Pelicula;
 import com.example.future_scope.model.Review;
 import com.example.future_scope.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import static androidx.core.content.ContextCompat.checkSelfPermission;
+
 public class ProfileFragment extends Fragment {
 
+    static final int GALERIA_REQUEST = 2;
     int images[] = {R.drawable.carol};
     int n= Math.abs((new Random().nextInt())%5);
 
@@ -41,6 +69,14 @@ public class ProfileFragment extends Fragment {
     private PeliculaAmigoRecyclerAdapter peliculasAmigosAdapter;
     private ReviewRecyclerAdapter reviewRecyclerAdapter;
     private ListaRecyclerAdapter listaRecyclerAdapter;
+
+    private TextView nombre_usuario, descripcion_usuario;
+    private ImageView foto_usuario, btConfig;
+
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    private AlertDialog.Builder config_dialog;
+    private LayoutInflater inflaterLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -97,6 +133,100 @@ public class ProfileFragment extends Fragment {
         rvListas.setHasFixedSize(true);
         rvListas.setAdapter(listaRecyclerAdapter);
 
+        nombre_usuario = root.findViewById(R.id.nombre_usuario_perfil);
+        foto_usuario = root.findViewById(R.id.foto_usuario_perfil);
+        descripcion_usuario = root.findViewById(R.id.descripcion_perfil);
+
+        if(checkSelfPermission(getContext(),Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(getActivity(), permissions, 200);
+        }
+        if(checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(getActivity(), permissions, 200);
+        }
+
+        if(user != null){
+            nombre_usuario.setText(user.getDisplayName());
+            if(user.getPhotoUrl() != null){
+                Uri photo = user.getPhotoUrl();
+                foto_usuario.setImageURI(photo);
+            }
+        }
+
+        config_dialog = new AlertDialog.Builder(this.getActivity(), R.style.AlertDialogCustom);
+        inflaterLayout = this.getActivity().getLayoutInflater();
+        btConfig = root.findViewById(R.id.config_button);
+
+        btConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = inflaterLayout.inflate(R.layout.alert_dialog_config, null);
+
+                Button btLogout = view.findViewById(R.id.bt_logout);
+                Button btDescripcion = view.findViewById(R.id.descripcion);
+                Button btFotoPerfil = view.findViewById(R.id.fotoPerfil);
+                EditText textoDescripcion = view.findViewById(R.id.et_descripcion);
+
+                btLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent i = new Intent(view.getContext(), SignInActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    }
+                });
+                btDescripcion.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        descripcion_usuario.setText(textoDescripcion.getText());
+                    }
+                });
+                btFotoPerfil.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        abrirGaleria();
+                    }
+                });
+                config_dialog
+                        .setNegativeButton("Salir", null)
+                        .setView(view)
+                        .create().show();
+            }
+        });
+
+
+
         return root;
+    }
+
+    private void abrirGaleria() {
+        Intent galeriaIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(galeriaIntent, GALERIA_REQUEST);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALERIA_REQUEST && resultCode == Activity.RESULT_OK) {
+                //try {
+                    Uri imageUri = data.getData();
+                    foto_usuario.setImageURI(imageUri);
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(imageUri).build();
+                    user.updateProfile(profileUpdates);
+
+                    /*InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    selectedImage.compress(Bitmap.CompressFormat.JPEG,100,baos);
+                    foto_usuario.setImageBitmap(selectedImage);*/
+
+                /*} catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }*/
+        }
     }
 }

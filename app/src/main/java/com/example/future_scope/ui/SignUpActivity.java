@@ -132,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
                         Toast.makeText(SignUpActivity.this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

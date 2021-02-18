@@ -91,6 +91,7 @@ public class SignInActivity extends AppCompatActivity {
                         Toast.makeText(SignInActivity.this, "¡Bienvenidx al Himalaya, "+ username +"!", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -139,15 +140,12 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*
-        * DESCOMENTAR UNA VEZ ESTÉ IMPLEMENTADO EL BOTÓN DE CERRAR SESIÓN / LOGOUT
-        *
+
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent i = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(i);
             finish();
         }
-        *
-        */
+
     }
 }
