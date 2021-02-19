@@ -12,15 +12,15 @@ public class Review {
 
     @PrimaryKey(autoGenerate = true)
     private Long idReview;
-    private User usuario;
-    private Pelicula pelicula;
+    private String usuario;
+    private String pelicula;
     private String tituloReview;
     private String descripcion;
     private double rating;
     private Calendar fecha;
     private boolean favorito;
 
-    public Review(Long idReview, User usuario, Pelicula pelicula, String tituloReview, String descripcion, double rating, Calendar fecha, boolean favorito) {
+    public Review(Long idReview, String usuario, String pelicula, String tituloReview, String descripcion, double rating, Calendar fecha, boolean favorito) {
         this.idReview = idReview;
         this.usuario = usuario;
         this.pelicula = pelicula;
@@ -32,7 +32,7 @@ public class Review {
     }
 
     @Ignore
-    public Review(User usuario, Pelicula pelicula, String tituloReview, String descripcion, double rating, Calendar fecha) {
+    public Review(String usuario, String pelicula, String tituloReview, String descripcion, double rating, Calendar fecha) {
         this.usuario = usuario;
         this.pelicula = pelicula;
         this.tituloReview = tituloReview;
@@ -42,7 +42,7 @@ public class Review {
     }
 
     @Ignore
-    public Review(User usuario, Pelicula pelicula, String descripcion, double rating, Calendar fecha, boolean favorito) {
+    public Review(String usuario, String pelicula, String descripcion, double rating, Calendar fecha, boolean favorito) {
         this.usuario = usuario;
         this.pelicula = pelicula;
         this.descripcion = descripcion;
@@ -67,19 +67,19 @@ public class Review {
         this.favorito = favorito;
     }
 
-    public User getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(User usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
-    public Pelicula getPelicula() {
+    public String getPelicula() {
         return pelicula;
     }
 
-    public void setPelicula(Pelicula pelicula) {
+    public void setPelicula(String pelicula) {
         this.pelicula = pelicula;
     }
 

@@ -75,15 +75,15 @@ public class ReviewActivity extends AppCompatActivity  implements AppRepository.
         publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Review r = new Review(user,new Pelicula(pelicula),descripcion.getText().toString(),ratingBar.getRating(), Calendar.getInstance(),likeButton.isLiked());
+                Review r = new Review(user.getUsername(),pelicula.getTitle(),descripcion.getText().toString(),ratingBar.getRating(), Calendar.getInstance(),likeButton.isLiked());
                 System.out.println(r);
 
                 platoRoom.insertarReview(r);
                 platoRoom.buscarReviews();
 
-                /*Intent i = new Intent(ReviewActivity.this, MainActivity.class);
+                Intent i = new Intent(ReviewActivity.this, MainActivity.class);
                 startActivity(i);
-                finish();*/
+                finish();
             }
         });
 

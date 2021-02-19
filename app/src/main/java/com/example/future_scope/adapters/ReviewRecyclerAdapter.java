@@ -42,11 +42,11 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
 
         Review review = mDataset.get(position);
         reviewViewHolder.fotoPerfil.setImageResource(R.drawable.carol);
-        reviewViewHolder.tituloPelicula.setText(review.getPelicula().getTitulo());
+        reviewViewHolder.tituloPelicula.setText(review.getPelicula());
         reviewViewHolder.tituloReview.setText(review.getTituloReview());
         reviewViewHolder.descripcion.setText(review.getDescripcion());
         reviewViewHolder.rating.setText(""+review.getRating());
-        reviewViewHolder.nombre.setText(""+review.getUsuario().getUsername());
+        reviewViewHolder.nombre.setText(""+review.getUsuario());
 
     }
 

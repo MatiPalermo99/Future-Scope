@@ -81,10 +81,10 @@ public class PeliculasFragment extends Fragment{
         User u2 = new User("micapierotti@gmail.com","mics","12345678");
         User u3 = new User("matipalermo@gmail.com","mati","12345678");
 
-        Review r1 = new Review (u1,p1,"Muy buena!","Increible pelicula me re gusto!",8.2, Calendar.getInstance());
-        Review r2 = new Review (u2,p2,"La mejor pelicula","Es imposible que esta pelicula no haya ganado ningun Oscar!",9.0, Calendar.getInstance());
-        Review r3 = new Review (u2,p3,"Malisima","Las 2 peores horas de mi vida",3.5, Calendar.getInstance());
-        Review r4 = new Review (u3,p4,"Mi favorita","Esta pelicula la voy a ver un millon de veces seguramente",9.5, Calendar.getInstance());
+        Review r1 = new Review (u1.getUsername(),p1.getTitulo(),"Muy buena!","Increible pelicula me re gusto!",8.2, Calendar.getInstance());
+        Review r2 = new Review (u2.getUsername(),p2.getTitulo(),"La mejor pelicula","Es imposible que esta pelicula no haya ganado ningun Oscar!",9.0, Calendar.getInstance());
+        Review r3 = new Review (u2.getUsername(),p3.getTitulo(),"Malisima","Las 2 peores horas de mi vida",3.5, Calendar.getInstance());
+        Review r4 = new Review (u3.getUsername(),p4.getTitulo(),"Mi favorita","Esta pelicula la voy a ver un millon de veces seguramente",9.5, Calendar.getInstance());
 
         listaReviewsAmigos.add(r1);
         listaReviewsAmigos.add(r2);

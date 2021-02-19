@@ -1,28 +1,19 @@
 package com.example.future_scope.room;
 
-import android.util.Pair;
-
 import androidx.room.TypeConverter;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
+import java.util.Calendar;
 
 public class Converters {
-
-    /*
     @TypeConverter
-    public static List<Pair<String,String>> fromString(String value) {
-        Type listType = new TypeToken<List<Pair<String,String>>>() {}.getType();
-        return new Gson().fromJson(value, listType);
+    public static Calendar toCalendar(Long l){
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(l);
+        return c;
     }
 
     @TypeConverter
-    public static String fromList(List<Pair<String,String>> list) {
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
-    }*/
+    public static Long fromCalendar(Calendar c){
+        return c == null ? null : c.getTime().getTime();
+    }
 }

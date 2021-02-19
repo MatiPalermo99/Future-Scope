@@ -88,15 +88,14 @@ public class SignInActivity extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         String username =  user.getDisplayName();
-                        Toast.makeText(SignInActivity.this, "¡Bienvenidx al Himalaya, "+ username +"!", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(SignInActivity.this, MainActivity.class);
+                         Intent i = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignInActivity.this, "Error: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Error: No se pudo iniciar sesión", Toast.LENGTH_SHORT).show();
                     }
                 });
 

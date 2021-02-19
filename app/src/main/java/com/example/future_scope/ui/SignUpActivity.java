@@ -139,7 +139,6 @@ public class SignUpActivity extends AppCompatActivity {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
                         user.updateProfile(profileUpdates);
-                        Toast.makeText(SignUpActivity.this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show();
                         scheduleNotification(getNotification("Muchas gracias por unirse a la comunidad de FutureScope :)", "¡Bienvenidx al Himalaya!"),2000);
                         Intent i = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(i);
@@ -148,7 +147,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpActivity.this, "Error: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Error: No pudo registrarse el usuario", Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -42,7 +42,7 @@ public class PeliculaAmigoRecyclerAdapter extends RecyclerView.Adapter<PeliculaA
         Review review = mDataset.get(position);
         peliculaAmigoViewHolder.fotoPerfil.setImageResource(R.drawable.carol);
         peliculaAmigoViewHolder.imgPelicula.setImageResource(R.drawable.carol);
-        peliculaAmigoViewHolder.titulo.setText(review.getPelicula().getTitulo());
+        peliculaAmigoViewHolder.titulo.setText(review.getPelicula());
         peliculaAmigoViewHolder.rating.setText(""+review.getRating());
     }
 
