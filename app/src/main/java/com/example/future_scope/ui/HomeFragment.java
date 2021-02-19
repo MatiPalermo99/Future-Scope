@@ -1,6 +1,8 @@
 package com.example.future_scope.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -26,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static androidx.core.content.ContextCompat.checkSelfPermission;
+
 public class HomeFragment extends Fragment {
 
     int images[] = {R.drawable.carol};
@@ -39,6 +44,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        if(checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(getActivity(), permissions, 200);
+        }
+        if(checkSelfPermission(getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(getActivity(), permissions, 200);
+        }
 
         tabLayout= root.findViewById(R.id.tablayout);
         viewPager=root.findViewById(R.id.viewpager);

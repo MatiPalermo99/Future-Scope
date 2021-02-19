@@ -1,8 +1,13 @@
 package com.example.future_scope.ui;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -19,9 +24,11 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.future_scope.MainActivity;
 import com.example.future_scope.R;
+import com.example.future_scope.ui.broadcast.MyNotificationPublisher;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +39,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity {
+
+    public static final String NOTIFICATION_CHANNEL_ID = "10001";
+    private final static String default_notification_channel_id = "default";
 
     private EditText emailRegistro,usuarioRegistro,contraseniaRegistro,repetirContraseniaRegistro;
     private Button registrarse;
@@ -130,6 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
                         user.updateProfile(profileUpdates);
                         Toast.makeText(SignUpActivity.this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show();
+                        scheduleNotification(getNotification("Muchas gracias por unirse a la comunidad de FutureScope :)", "¡Bienvenidx al Himalaya!"),2000);
                         Intent i = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();
@@ -143,5 +154,26 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void scheduleNotification(Notification notification, int delay) {
+
+        Intent notificationIntent = new Intent(this, MyNotificationPublisher.class);
+        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+    private Notification getNotification(String content, String tittle) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, default_notification_channel_id);
+        builder.setContentTitle(!tittle.isEmpty() ? tittle : "Scheduled Notification");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        builder.setAutoCancel(true);
+        builder.setChannelId(NOTIFICATION_CHANNEL_ID);
+        return builder.build();
     }
 }

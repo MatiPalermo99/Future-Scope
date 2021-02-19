@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/fotoPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Elegir foto de perfil" />
-
     <EditText
         android:id="@+id/et_descripcion"
         android:layout_width="match_parent"
@@ -18,13 +12,23 @@
         android:gravity="start|top"
         android:hint="Descripción"
         android:inputType="textMultiLine"
-        android:maxLength="150"/>
+        android:maxLength="150"
+        android:fontFamily="@font/calibri"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/yellow"/>
 
     <Button
         android:id="@+id/descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar descripción" />
+
+    <Button
+        android:id="@+id/fotoPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elegir foto de perfil" />
 
     <Button
         android:id="@+id/bt_logout"
