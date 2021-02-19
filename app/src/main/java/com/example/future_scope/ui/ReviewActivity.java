@@ -13,85 +13,70 @@ import android.widget.TextView;
 import com.example.future_scope.MainActivity;
 import com.example.future_scope.R;
 import com.example.future_scope.api.SearchResults;
-import com.example.future_scope.model.Pelicula;
 import com.example.future_scope.model.Review;
 import com.example.future_scope.model.User;
-import com.example.future_scope.room.AppDatabase;
 import com.example.future_scope.room.AppRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.like.LikeButton;
-import com.like.OnLikeListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity  implements AppRepository.OnResultCallback{
 
     private SearchResults.ResultsDTO pelicula;
-    private TextView titulo;
+    private TextView titulo,fechaReview;
     private LikeButton likeButton;
     private RatingBar ratingBar;
     private Button publicar;
     private User user;
     private MultiAutoCompleteTextView descripcion;
-    private AppRepository platoRoom;
+    private AppRepository reviewRoom;
+    private Calendar fecha;
+    private FirebaseUser userFB = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
-
-        platoRoom = new AppRepository(this.getApplication(),this);
+        reviewRoom = new AppRepository(this.getApplication(),this);
+        fecha=Calendar.getInstance();
 
         pelicula=getIntent().getParcelableExtra("pelicula");
-        user=getIntent().getParcelableExtra("usuario");
+        //user=getIntent().getParcelableExtra("usuario");
+        user=new User(userFB);
 
         titulo=findViewById(R.id.titulo_review_activity);
         titulo.setText("Review de "+pelicula.getTitle());
 
         likeButton=findViewById(R.id.star_button);
         ratingBar=findViewById(R.id.ratingbar);
-        likeButton.setOnLikeListener(new OnLikeListener() {
-            @Override
-            public void liked(LikeButton likeButton) {
-                System.out.println("ME GUSTA");
-            }
-
-            @Override
-            public void unLiked(LikeButton likeButton) {
-                System.out.println("NO ME GUSTA");
-            }
-        });
-
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                System.out.println(rating);
-            }
-        });
 
         descripcion=findViewById(R.id.descripcion);
+        fechaReview=findViewById(R.id.fecha_review);
+        fechaReview.setText(new SimpleDateFormat("dd/MM/yyyy").format(fecha.getTime()));
 
         publicar=findViewById(R.id.publicar_review);
         publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Review r = new Review(user.getUsername(),pelicula.getTitle(),descripcion.getText().toString(),ratingBar.getRating(), Calendar.getInstance(),likeButton.isLiked());
+                Review r = new Review(user.getUsername(),pelicula.getTitle(),descripcion.getText().toString(),ratingBar.getRating(), fecha,likeButton.isLiked());
                 System.out.println(r);
 
-                platoRoom.insertarReview(r);
-                platoRoom.buscarReviews();
+                reviewRoom.insertarReview(r);
+                reviewRoom.buscarReviews();
 
                 Intent i = new Intent(ReviewActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-
-
     }
 
     @Override
     public void onResultBusqueda(List result) {
-        System.out.println(result);
+        System.out.println("RESULTADO: "+result);
     }
 }

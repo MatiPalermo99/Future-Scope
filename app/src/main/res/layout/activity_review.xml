@@ -31,49 +31,110 @@
         android:layout_marginBottom="20dp"
         android:background="#deff00" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="1mm"
-        android:paddingLeft="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/bebasneue"
-        android:textStyle="bold"
-        android:text="rating"
-        android:textColor="@color/yellow"
-        android:textSize="25sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         android:orientation="horizontal">
 
-
-        <RatingBar
-            android:id="@+id/ratingbar"
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:numStars="5"
-            android:theme="@style/RatingBar"
-            android:rating="0"></RatingBar>
-
-        <com.like.LikeButton
-            app:icon_type="heart"
-            android:textAlignment="viewEnd"
-            app:dots_primary_color="@color/yellow"
-            app:circle_end_color="@color/yellow"
-            app:circle_start_color="@color/yellow"
-            app:dots_secondary_color="@color/yellow"
-            app:icon_size="10dp"
-            android:paddingBottom="10dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
             android:paddingLeft="20dp"
-            android:id="@+id/star_button"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/bebasneue"
+            android:text="fecha"
+            android:textColor="@color/yellow"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fecha_review"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textAlignment="viewEnd"
+            android:paddingRight="20dp"
+            android:fontFamily="@font/bebasneue"
+            android:text="dd/mm/yyyy"
+            android:textColor="@color/yellow"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RatingBar
+                android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:numStars="5"
+                android:rating="0"
+                android:theme="@style/RatingBar"></RatingBar>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:text="rating"
+                android:textColor="@color/yellow"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.like.LikeButton
+                android:id="@+id/star_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:paddingBottom="10dp"
+                app:circle_end_color="@color/yellow"
+                app:circle_start_color="@color/yellow"
+                app:dots_primary_color="@color/yellow"
+                app:dots_secondary_color="@color/yellow"
+                app:icon_size="10dp"
+                app:icon_type="heart" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bebasneue"
+                android:text="like"
+                android:textColor="@color/yellow"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <MultiAutoCompleteTextView
         android:layout_marginHorizontal="20dp"
@@ -84,6 +145,7 @@
         android:layout_height="200dp"
         android:padding="10dp"
         android:gravity="top"
+        android:textColor="@color/yellow"
         android:fontFamily="@font/calibri"
         android:background="@drawable/tv_border" />
 

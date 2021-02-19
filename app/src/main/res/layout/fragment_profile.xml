@@ -90,7 +90,7 @@
                     android:maxLines="7"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:text="Descripcion del usuario mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto"
+                    android:text="''I know it was you Freddo'' \n \nCinéfilo y amante del buen arte."
                     android:textColor="@color/yellow"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toStartOf="@+id/foto_usuario_home"

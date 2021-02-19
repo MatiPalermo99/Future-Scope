@@ -92,13 +92,13 @@ public class PeliculasFragment extends Fragment{
         listaReviewsAmigos.add(r4);
 
         rvAmigos = root.findViewById(R.id.rv_peliculas_amigos);
-        peliculasAmigosAdapter = new PeliculaAmigoRecyclerAdapter(listaReviewsAmigos);
+        peliculasAmigosAdapter = new PeliculaAmigoRecyclerAdapter(listaReviewsAmigos,getResources().getDrawable(R.drawable.carol));
         rvAmigos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvAmigos.setHasFixedSize(true);
         rvAmigos.setAdapter(peliculasAmigosAdapter);
 
         rvReviews = root.findViewById(R.id.rv_reviews);
-        reviewRecyclerAdapter = new ReviewRecyclerAdapter(listaReviewsAmigos);
+        reviewRecyclerAdapter = new ReviewRecyclerAdapter(listaReviewsAmigos,getResources().getDrawable(R.drawable.carol));
         rvReviews.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvReviews.setHasFixedSize(true);
         rvReviews.setAdapter(reviewRecyclerAdapter);

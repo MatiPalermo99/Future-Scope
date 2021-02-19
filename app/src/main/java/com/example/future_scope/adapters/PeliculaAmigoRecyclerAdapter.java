@@ -1,5 +1,6 @@
 package com.example.future_scope.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ import java.util.List;
 public class PeliculaAmigoRecyclerAdapter extends RecyclerView.Adapter<PeliculaAmigoRecyclerAdapter.PeliculaAmigoViewHolder>{
 
     private List<Review> mDataset;
+    private Drawable foto;
 
-    public PeliculaAmigoRecyclerAdapter(List<Review> myDataset) {
+    public PeliculaAmigoRecyclerAdapter(List<Review> myDataset, Drawable foto) {
         mDataset = myDataset;
+        this.foto=foto;
     }
 
     @Override
@@ -38,12 +41,23 @@ public class PeliculaAmigoRecyclerAdapter extends RecyclerView.Adapter<PeliculaA
         peliculaAmigoViewHolder.titulo.setTag(position);
         peliculaAmigoViewHolder.fotoPerfil.setTag(position);
         peliculaAmigoViewHolder.rating.setTag(position);
+        peliculaAmigoViewHolder.fav.setTag(position);
 
         Review review = mDataset.get(position);
-        peliculaAmigoViewHolder.fotoPerfil.setImageResource(R.drawable.carol);
+        peliculaAmigoViewHolder.fotoPerfil.setImageDrawable(foto);
         peliculaAmigoViewHolder.imgPelicula.setImageResource(R.drawable.carol);
         peliculaAmigoViewHolder.titulo.setText(review.getPelicula());
         peliculaAmigoViewHolder.rating.setText(""+review.getRating());
+
+        if (review.isFavorito()){
+            ViewGroup.LayoutParams params = peliculaAmigoViewHolder.rating.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            peliculaAmigoViewHolder.rating.setLayoutParams(params);
+        }else{
+            ViewGroup.LayoutParams params = peliculaAmigoViewHolder.rating.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            peliculaAmigoViewHolder.rating.setLayoutParams(params);
+        }
     }
 
     @Override
@@ -54,7 +68,7 @@ public class PeliculaAmigoRecyclerAdapter extends RecyclerView.Adapter<PeliculaA
     public class PeliculaAmigoViewHolder extends RecyclerView.ViewHolder {
 
         CardView card;
-        ImageView imgPelicula,fotoPerfil;
+        ImageView imgPelicula,fotoPerfil,fav;
         TextView titulo,rating;
 
         public PeliculaAmigoViewHolder(@NonNull View v) {
@@ -64,6 +78,7 @@ public class PeliculaAmigoRecyclerAdapter extends RecyclerView.Adapter<PeliculaA
             imgPelicula = v.findViewById(R.id.imagen_pelicula_amigo);
             titulo = v.findViewById(R.id.titulo_pelicula_amigo);
             rating = v.findViewById(R.id.rating_usuario);
+            fav= v.findViewById(R.id.fav_home);
         }
     }
 }

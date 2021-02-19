@@ -3,23 +3,23 @@ package com.example.future_scope.model;
 import java.util.ArrayList;
 
 public class Lista {
-    private User propietarioLista;
+    private String propietarioLista;
     private ArrayList<Pelicula> listaPeliculas;
     private String descripcionLista;
     private String nombreLista;
 
-    public Lista(User propietarioLista, ArrayList<Pelicula> listaPeliculas, String descripcionLista, String nombreLista) {
+    public Lista(String propietarioLista, ArrayList<Pelicula> listaPeliculas, String descripcionLista, String nombreLista) {
         this.propietarioLista = propietarioLista;
         this.listaPeliculas = listaPeliculas;
         this.descripcionLista = descripcionLista;
         this.nombreLista = nombreLista;
     }
 
-    public User getPropietarioLista() {
+    public String getPropietarioLista() {
         return propietarioLista;
     }
 
-    public void setPropietarioLista(User propietarioLista) {
+    public void setPropietarioLista(String propietarioLista) {
         this.propietarioLista = propietarioLista;
     }
 

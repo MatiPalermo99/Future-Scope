@@ -7,19 +7,6 @@
     tools:context=".ui.HomeFragment"
     android:orientation="vertical">
 
-    <SearchView
-        app:theme="@style/AppSearchView"
-        android:paddingBottom="1mm"
-       android:paddingHorizontal="1mm"
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:animateLayoutChanges="true"
-        app:queryHint="Buscar"
-        android:layout_margin="1mm"
-        android:layoutDirection="rtl">
-    </SearchView>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"

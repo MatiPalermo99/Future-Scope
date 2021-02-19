@@ -6,6 +6,9 @@ import android.os.Parcelable;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 @Entity
@@ -87,6 +90,10 @@ public class User implements Parcelable {
         this.username = username;
     }
 
+    public User(FirebaseUser user) {
+        this.username = user.getDisplayName();
+        this.email = user.getEmail();
+    }
     public String getEmail() {
         return email;
     }

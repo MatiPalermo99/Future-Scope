@@ -1,5 +1,6 @@
 package com.example.future_scope.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ import java.util.List;
 public class ListaRecyclerAdapter extends RecyclerView.Adapter<ListaRecyclerAdapter.ListaViewHolder>{
 
     private List<Lista> mDataset;
+    private Drawable foto;
 
-    public ListaRecyclerAdapter(List<Lista> myDataset) {
+    public ListaRecyclerAdapter(List<Lista> myDataset, Drawable foto) {
         mDataset = myDataset;
+        this.foto =foto;
     }
 
     @Override
@@ -50,9 +53,9 @@ public class ListaRecyclerAdapter extends RecyclerView.Adapter<ListaRecyclerAdap
 
         Lista lista = mDataset.get(position);
 
-        listaViewHolder.fotoPerfil.setImageResource(R.drawable.carol);
+        listaViewHolder.fotoPerfil.setImageDrawable(foto);
         listaViewHolder.tituloLista.setText(lista.getNombreLista());
-        listaViewHolder.nombreLista.setText(lista.getPropietarioLista().getUsername());
+        listaViewHolder.nombreLista.setText(lista.getPropietarioLista());
 
         if(lista.getListaPeliculas().size()>0) listaViewHolder.tituloPelicula1.setText(lista.getListaPeliculas().get(0).getTitulo());
         if(lista.getListaPeliculas().size()>1) listaViewHolder.tituloPelicula2.setText(lista.getListaPeliculas().get(1).getTitulo());
