@@ -4,9 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.future_scope.R;
 import com.example.future_scope.adapters.ListaRecyclerAdapter;
 import com.example.future_scope.adapters.PeliculaAmigoRecyclerAdapter;
@@ -31,15 +36,25 @@ import com.example.future_scope.model.Pelicula;
 import com.example.future_scope.model.Review;
 import com.example.future_scope.model.User;
 import com.example.future_scope.room.AppRepository;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import static androidx.core.content.ContextCompat.checkSelfPermission;
 
@@ -69,6 +84,12 @@ public class ProfileFragment extends Fragment implements AppRepository.OnResultC
     private AlertDialog.Builder config_dialog;
     private LayoutInflater inflaterLayout;
     private AppRepository reviewRoom;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+    private StorageReference fotoPerfilRef;
+    StorageReference gsReference;
+    private UploadTask uploadTask;
+    private Uri downloadUri, imageUri;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +98,10 @@ public class ProfileFragment extends Fragment implements AppRepository.OnResultC
 
         reviewRoom = new AppRepository(getActivity().getApplication(),this);
         reviewRoom.buscarReviews();
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
 
         Pelicula p1 = new Pelicula("Birdman or (the unexpected virtue of ignorance)",2016,120,5.0);
         listaPeliculasAux.add(p1);
@@ -128,8 +153,9 @@ public class ProfileFragment extends Fragment implements AppRepository.OnResultC
         if(user != null){
             nombre_usuario.setText(user.getDisplayName());
             if(user.getPhotoUrl() != null){
-                Uri photo = user.getPhotoUrl();
-                foto_usuario.setImageURI(photo);
+                Glide.with(getActivity())
+                        .load(user.getPhotoUrl())
+                        .into(foto_usuario);
             }
         }
 
@@ -203,13 +229,14 @@ public class ProfileFragment extends Fragment implements AppRepository.OnResultC
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALERIA_REQUEST && resultCode == Activity.RESULT_OK) {
-                //try {
+            Uri selectedImage = data.getData();
+            //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            foto_usuario.setImageURI(selectedImage);
+            handleUpload(selectedImage);
 
-            Uri imageUri = data.getData();
+            /* Uri imageUri = data.getData();
             foto_usuario.setImageURI(imageUri);
-
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(imageUri).build();
-            user.updateProfile(profileUpdates);
+            uploadPicture();*/
 
             peliculasAdapter = new PeliculaAmigoRecyclerAdapter(listaPeliculas,foto_usuario.getDrawable());
             rvPeliculas.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -226,17 +253,62 @@ public class ProfileFragment extends Fragment implements AppRepository.OnResultC
             rvListas.setHasFixedSize(true);
             rvListas.setAdapter(listaRecyclerAdapter);
 
-                    /*InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    selectedImage.compress(Bitmap.CompressFormat.JPEG,100,baos);
-                    foto_usuario.setImageBitmap(selectedImage);*/
 
-                /*} catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }*/
         }
     }
+
+    private void handleUpload(Uri uriImage) {
+        /*ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+*/
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        StorageReference referenceS = FirebaseStorage.getInstance().getReference()
+                .child("profileImages")
+                .child(uid + ".jpeg");
+
+        referenceS.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                getDownloadUrl(referenceS);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("TAG", "onFailure: ", e.getCause());
+            }
+        });
+    }
+
+    private void getDownloadUrl(StorageReference reference){
+        reference.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("TAG", "onSuccess: " + uri);
+                        setUserProfileUrl(uri);
+                    }
+                });
+    }
+
+    private void setUserProfileUrl(Uri uri){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build();
+        user.updateProfile(request)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Updated succesfully", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Profile image failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onResultBusqueda(List result) {
