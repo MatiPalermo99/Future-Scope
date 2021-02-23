@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.ReviewActivity">
+
+    <TextView
+        android:id="@+id/titulo_review_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingTop="1mm"
+        android:paddingLeft="1mm"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/bebasneue"
+        android:textStyle="bold"
+        android:text="review de pelicula  pelicula  pelicula  pelicula  pelicula  pelicula v pelicula "
+        android:textColor="@color/yellow"
+        android:textSize="30sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="2mm"
+        android:layout_marginBottom="20dp"
+        android:background="#deff00" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/bebasneue"
+            android:text="fecha"
+            android:textColor="@color/yellow"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fecha_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textAlignment="viewEnd"
+            android:paddingRight="20dp"
+            android:fontFamily="@font/bebasneue"
+            android:text="dd/mm/yyyy"
+            android:textColor="@color/yellow"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RatingBar
+                android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:numStars="5"
+                android:rating="0"
+                android:theme="@style/RatingBar"></RatingBar>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:text="rating"
+                android:textColor="@color/yellow"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.like.LikeButton
+                android:id="@+id/star_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:paddingBottom="10dp"
+                app:circle_end_color="@color/yellow"
+                app:circle_start_color="@color/yellow"
+                app:dots_primary_color="@color/yellow"
+                app:dots_secondary_color="@color/yellow"
+                app:icon_size="10dp"
+                app:icon_type="heart" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bebasneue"
+                android:text="like"
+                android:textColor="@color/yellow"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <MultiAutoCompleteTextView
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/descripcion"
+        android:hint="Escribe tu review aquí..."
+        android:textColorHint="@color/yellow"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="10dp"
+        android:gravity="top"
+        android:textColor="@color/yellow"
+        android:fontFamily="@font/calibri"
+        android:background="@drawable/tv_border" />
+
+    <Button
+        android:layout_marginVertical="30dp"
+        android:id="@+id/publicar_review"
+        android:background="@drawable/button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textColor="@color/black"
+        android:theme="@style/Button"
+        android:layout_marginHorizontal="100dp"
+        android:text="Publicar Review">
+    </Button>
+
+</LinearLayout>

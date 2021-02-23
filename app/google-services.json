@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "713246615204",
+    "project_id": "futurescope-2076c",
+    "storage_bucket": "futurescope-2076c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713246615204:android:e5377805f4863811aee831",
+        "android_client_info": {
+          "package_name": "com.example.future_scope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713246615204-qt2v3vi6p4eomu018o3dtoqeh146n8t1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdgelxw3C9T_TH3yN54-YRBGTPMHLFhOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713246615204-qt2v3vi6p4eomu018o3dtoqeh146n8t1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,20 +6,30 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.future_scope.ui.ProfileFragment"
+        android:label= "@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_agregar"
+        android:name="com.example.future_scope.ui.AgregarFragment"
+        android:label="@string/title_agregar"
+        tools:layout="@layout/fragment_agregar" />
+    <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.future_scope.ui.home.HomeFragment"
+        android:name="com.example.future_scope.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.future_scope.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_watchlist"
+        android:name="com.example.future_scope.ui.WatchlistFragment"
+        android:label= "@string/title_watchlist"
+        tools:layout="@layout/fragment_watchlist" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.future_scope.ui.notifications.NotificationsFragment"
+        android:name="com.example.future_scope.ui.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

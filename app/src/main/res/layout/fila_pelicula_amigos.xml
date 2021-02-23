@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewPeliculasAmigos"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="15dp"
+        card_view:cardElevation="5dp"
+        card_view:cardMaxElevation="2dp"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="140dp">
+
+                <ImageView
+                    android:id="@+id/imagen_pelicula_amigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titulo_pelicula_amigo"
+                    android:layout_width="match_parent"
+                    android:textAllCaps="true"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="Titulo de la pelicula a mostrar"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:textSize="13dp"
+                    android:padding="0.5mm"
+                    android:fontFamily="@font/gotham"
+                    android:textColor="@color/yellow"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/foto_usuario_home"
+                        android:padding="3dp"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/carol"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/yellow"/>
+
+
+                    <TextView
+                        android:id="@+id/rating_usuario"
+                        android:fontFamily="@font/gotham"
+                        android:textColor="@color/yellow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="9.0"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textAlignment="center"
+                        ></TextView>
+
+                    <ImageView
+                        android:id="@+id/fav_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/ic_baseline_favorite_24">
+                    </ImageView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

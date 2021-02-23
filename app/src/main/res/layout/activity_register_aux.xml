@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="199dp"
+        android:text="¡Bienvenidos al Himalaya!"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:textSize="30dp"
+        tools:ignore="RtlCompat"
+        android:background="@drawable/himalaya"></TextView>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Dirección de email"
+        android:inputType="textEmailAddress"
+        android:layout_margin="2mm"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre de usuario"
+        android:inputType="textPersonName"
+        android:layout_margin="2mm"
+        />
+
+    <EditText
+        android:id="@+id/contrasenia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:layout_margin="2mm"
+        />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2mm"
+        android:text="Tengo al menos 16 años y acepto los Terminos de uso."
+        ></Switch>
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2mm"
+        android:text="Acepto las políticas de privacidad y concedo el uso de mi información personal de acuerdo a las mismas."
+        ></Switch>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="1mm">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Iniciar Sesión"
+            android:layout_marginRight="1mm"></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="1mm"
+            android:text="Aceptar"></Button>
+    </LinearLayout>
+
+</LinearLayout>

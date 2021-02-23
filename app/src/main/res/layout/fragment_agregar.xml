@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AgregarFragment"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <SearchView
+        app:theme="@style/AppSearchView"
+        android:iconifiedByDefault="false"
+        android:paddingBottom="1mm"
+        android:paddingHorizontal="1mm"
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:animateLayoutChanges="true"
+        app:queryHint="Buscar"
+        android:layout_margin="1mm"
+        android:layoutDirection="rtl">
+    </SearchView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_peliculas_populares"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"/>
+
+</LinearLayout>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.SignInActivity">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/welcome" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebasneue"
+                android:text="''WELCOME TO JURASSIC PARK''"
+                android:textColor="@color/white"
+                android:textSize="32sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="#deff00" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/bebasneue"
+        android:gravity="center"
+        android:text="Jurassic Park (1993)"
+        android:textColor="#9affffff"
+        android:textSize="10sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/calibri"
+            android:text="¡Ingrese sus datos personales!"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:id="@+id/email_registro"
+            android:layout_width="match_parent"
+            style="@style/EditScreenTextInputLayoutStyle"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/yellow"
+            android:layout_height="match_parent"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/ic_email_white_24dp"
+            android:fontFamily="@font/calibri"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:maxLength="40"/>
+
+        <EditText
+            android:id="@+id/usuario_registro"
+            android:layout_width="match_parent"
+            style="@style/EditScreenTextInputLayoutStyle"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/yellow"
+            android:layout_height="match_parent"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/ic_baseline_person_registro_24"
+            android:fontFamily="@font/calibri"
+            android:hint="Nombre de usuario"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:maxLength="20"/>
+
+        <EditText
+            android:id="@+id/contrasenia_registro"
+            android:layout_width="match_parent"
+            style="@style/EditScreenTextInputLayoutStyle"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/yellow"
+            android:layout_height="match_parent"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/ic_lock_white_24dp"
+            android:fontFamily="@font/calibri"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:maxLength="20"/>
+
+        <EditText
+            android:id="@+id/repetir_contrasenia_registro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditScreenTextInputLayoutStyle"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/yellow"
+            android:drawablePadding="16dp"
+            android:drawableRight="@drawable/ic_lock_white_24dp"
+            android:fontFamily="@font/calibri"
+            android:hint="Repetir Contraseña"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:maxLength="20"/>
+
+        <Switch
+            android:id="@+id/switch_terminos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2mm"
+            android:text="Tengo al menos 16 años y acepto los Terminos de uso."
+            android:textColor="@color/white"
+            ></Switch>
+
+
+        <Switch
+            android:id="@+id/switch_politicas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2mm"
+            android:textColor="@color/white"
+            android:text="Acepto las políticas de privacidad y concedo el uso de mi información personal de acuerdo a las mismas."
+            ></Switch>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/aceptar_registro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/buttonshapewhitebg"
+                android:fontFamily="@font/calibri"
+                android:text="Registrarse"
+                android:textAllCaps="false"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+       </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
